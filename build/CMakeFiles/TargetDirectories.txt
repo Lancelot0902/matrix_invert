@@ -1,0 +1,7 @@
+/home/lancelot/Desktop/matrix_invert/build/CMakeFiles/rebuild_cache.dir
+/home/lancelot/Desktop/matrix_invert/build/CMakeFiles/invert_unittest.dir
+/home/lancelot/Desktop/matrix_invert/build/CMakeFiles/edit_cache.dir
+/home/lancelot/Desktop/matrix_invert/build/CMakeFiles/invert_benchmark.dir
+/home/lancelot/Desktop/matrix_invert/build/src/invert/CMakeFiles/rebuild_cache.dir
+/home/lancelot/Desktop/matrix_invert/build/src/invert/CMakeFiles/invert.dir
+/home/lancelot/Desktop/matrix_invert/build/src/invert/CMakeFiles/edit_cache.dir

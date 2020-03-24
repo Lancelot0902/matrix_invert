@@ -1,0 +1,2 @@
+/usr/bin/ar qc libinvert.a  CMakeFiles/invert.dir/invert.cpp.o
+/usr/bin/ranlib libinvert.a
