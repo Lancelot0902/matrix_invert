@@ -144,16 +144,6 @@ static int LU(T *A, size_t astep, int n)
         row = i * astep;
         for (j = 0; j != n; ++j)
             A[row + j] *= alpha;
-        /*
-        row = i * astep;
-        if (k != i)
-            for (j = 0; j != n; ++j)
-                A[row + j] *= alpha;
-
-        T coef = 1 / A[i * astep + i];
-
-        for (j = 0; j != n; ++j)
-            A[row + j] *= coef;  */
 
         A[i * astep + i] = d;
 
