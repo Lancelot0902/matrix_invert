@@ -126,7 +126,7 @@ static int LU(T *A, size_t astep, int n)
         k = i;
         T max = A[i * astep + i];
 
-        for (j = i + 1; j != n; ++j)
+        for (j = i + 1; j < n; ++j)
             if (std::abs(A[j * astep + i]) > std::abs(max))
             {
                 k = j;
@@ -142,19 +142,21 @@ static int LU(T *A, size_t astep, int n)
         T coef = 1 / A[i * astep + i] * alpha;
 
         row = i * astep;
-        for (j = 0; j != n; ++j)
+#pragma omp parallel for
+        for (j = 0; j < n; ++j)
             A[row + j] *= alpha;
 
         A[i * astep + i] = d;
 
-        for (j = 0; j != n; ++j)
+        for (j = 0; j < n; ++j)
         {
             if (i == j)
                 continue;
             row = j * astep;
             d = -A[j * astep + i];
             A[row + i] = 0;
-            for (k = 0; k != n; ++k)
+#pragma omp parallel for
+            for (k = 0; k < n; ++k)
                 A[row + k] += A[i * astep + k] * d;
         }
     }

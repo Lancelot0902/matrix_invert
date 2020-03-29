@@ -21,7 +21,7 @@ static void BM_CV_INVERT(benchmark::State &state)
 
     for (auto _ : state)
     {
-        mcv::invert(m, n);
+        cv::invert(m, n);
     }
     state.SetItemsProcessed(state.iterations() * 1);
 }
