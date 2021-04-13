@@ -118,47 +118,59 @@ bool inverse(cv::InputArray _src, int method)
 template <typename T>
 static int LU(T *A, size_t astep, int n)
 {
-    int i, j, k, row;
+    int i, j, k, row, index;
     astep /= sizeof(A[0]);
 
+    int row_start = 0;
     for (i = 0; i != n; ++i)
     {
         k = i;
-        T max = A[i * astep + i];
+        T base = A[row_start + i];
+        T max = base;
 
-        for (j = i + 1; j < n; ++j)
-            if (std::abs(A[j * astep + i]) > std::abs(max))
-            {
+        index = (i + 1) * astep + i;
+        for (j = i + 1; j < n; ++j) {
+            if (std::abs(A[index]) > std::abs(max)) {
                 k = j;
-                max = A[j * astep + i];
+                max = A[index];
             }
+            index += astep;
+        }
 
         if (std::abs(max) < EPS)
             return 0;
 
-        T d = 1 / A[i * astep + i];
+        T d = 1 / base;
 
-        int alpha = max / A[i * astep + i];
-        T coef = 1 / A[i * astep + i] * alpha;
+        int alpha = max / base;
+        // T coef = 1 / base * alpha; // useless!!!
 
-        row = i * astep;
-#pragma omp parallel for
+        // row = row_start;
+
         for (j = 0; j < n; ++j)
-            A[row + j] *= alpha;
+            A[row_start + j] *= alpha;
 
-        A[i * astep + i] = d;
+        A[row_start + i] = d;
+
+        int row_start2 = 0;
 
         for (j = 0; j < n; ++j)
         {
-            if (i == j)
+            if (i == j) {
+                row_start2 += astep;
                 continue;
-            row = j * astep;
-            d = -A[j * astep + i];
-            A[row + i] = 0;
-#pragma omp parallel for
+            }
+            // row = j * astep;
+            d = -A[row_start2 + i];
+            A[row_start2 + i] = 0;
+
+// #pragma omp parallel for
             for (k = 0; k < n; ++k)
-                A[row + k] += A[i * astep + k] * d;
+                A[row_start2 + k] += A[row_start + k] * d;
+
+            row_start2 += astep;
         }
+        row_start += astep;
     }
     return 1;
 }

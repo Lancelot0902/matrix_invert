@@ -21,12 +21,12 @@ static void BM_CV_INVERT(benchmark::State &state)
 
     for (auto _ : state)
     {
-        cv::invert(m, n);
+        mcv::invert(m, n);
     }
     state.SetItemsProcessed(state.iterations() * 1);
 }
 
-#define RUN_CV_INVERT_FUNCTIONS(type) BENCHMARK_TEMPLATE(BM_CV_INVERT,float)->RangeMultiplier(10)->Apply(custom_args);
+#define RUN_CV_INVERT_FUNCTIONS(type) BENCHMARK_TEMPLATE(BM_CV_INVERT,float)->RangeMultiplier(2)->Range(100,1000);
 
 RUN_CV_INVERT_FUNCTIONS(float);
 
@@ -44,7 +44,7 @@ static void BM_MCV_INVERT(benchmark::State &state)
     state.SetItemsProcessed(state.iterations() * 1);
 }
 
-#define RUN_MCV_INVERT_FUNCTIONS(type) BENCHMARK_TEMPLATE(BM_MCV_INVERT,float)->RangeMultiplier(10)->Apply(custom_args);
+#define RUN_MCV_INVERT_FUNCTIONS(type) BENCHMARK_TEMPLATE(BM_MCV_INVERT,float)->RangeMultiplier(2)->Range(100,1000);
 
 RUN_MCV_INVERT_FUNCTIONS(float);
 

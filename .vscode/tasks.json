@@ -1,0 +1,41 @@
+{
+    "version": "2.0.0",
+    "tasks": [{
+            "label": "compile",
+            "command": "g++",
+            "args": [
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}",
+                "-I","/usr/local/include",
+                "-I","/usr/local/include/opnecv",
+                "-I","/usr/local/include/opnecv2",
+                "-L","/usr/local/lib",
+                "-l","opencv_core",
+                "-l","opencv_highgui",
+                "-l","opencv_imgproc",
+                "-l","opencv_imgcodecs"
+            ],
+            "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation": [
+                    "relative",
+                    "${workspaceRoot}"
+                ],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

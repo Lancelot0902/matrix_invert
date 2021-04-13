@@ -18,7 +18,7 @@ bool check_2_matrices(const cv::Mat &matrix1, const cv::Mat &matrix2, float eps)
 		q = matrix2.ptr<float>(i);
 		for (int j = 0; j != n; ++j)
 		{
-			//			std::cout<<p[j]<<" "<<q[j]<<std::endl;
+			// std::cout<<p[j]<<" "<<q[j]<<std::endl;
 			if (std::fabs(p[j] - q[j]) > eps)
 			{
 				if (std::fabs(p[j] - q[j]) > std::fabs(max))
@@ -31,8 +31,8 @@ bool check_2_matrices(const cv::Mat &matrix1, const cv::Mat &matrix2, float eps)
 			}
 		}
 	}
-	std::cout << a << " " << b << std::endl;
-	std::cout << max << std::endl;
+//	std::cout << a << " " << b << std::endl;
+//	std::cout << max << std::endl;
 	return flag;
 }
 
